@@ -9,6 +9,6 @@ import test.wallet.challenge.repository.entities.UserEntity;
 
 public interface SqlServerUserRepository extends JpaRepository<UserEntity, Integer>, JpaSpecificationExecutor<UserEntity> {
 
-    @Query("SELECT u FROM UserEntity u WHERE u.userId = :userId")
+    @Query("SELECT u FROM UserEntity  u WHERE u.userId = :userId")
     UserEntity findByUserId(@Param("userId") String userId);
 }
