@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 import test.wallet.challenge.domain.gateways.AccountRepository;
 import test.wallet.challenge.domain.gateways.UserRepository;
 import test.wallet.challenge.domain.model.AccountDTO;
