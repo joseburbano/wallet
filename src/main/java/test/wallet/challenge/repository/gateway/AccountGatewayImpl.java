@@ -27,23 +27,23 @@ public class AccountGatewayImpl implements AccountRepository {
 
     private final ModelMapper modelMapper;
 
-    private final MessageSource messageSource;
-
     private static final String RESOURCE_NAME = "AccountGateway";
 
     @Override
     public Mono<Void> save(AccountDTO accountDTO) {
+        log.info("save {} ", accountDTO);
         return Mono.fromSupplier(() -> repository.save(modelMapper.map(accountDTO, Account.class)))
                 .flatMap(savedEntity -> Mono.empty());
     }
 
     @Override
     public Mono<Double> updateAmount(Double amount, Integer userId) {
+        log.info("updateAmount {} {}", amount, userId);
         return Mono.justOrEmpty(repository.findByUserId(userId))
                 .switchIfEmpty(Mono.error(new InfrastructureException(ErrorCode.NOT_FOUND.getMessage(), ErrorCode.NOT_FOUND)))
                 .publishOn(Schedulers.boundedElastic())
                 .flatMap(accountEntity -> {
-                    accountEntity.setAmount(amount);
+                    accountEntity.setAmount(accountEntity.getAmount() + amount);
                     Account updatedEntity = repository.save(accountEntity);
                     return Mono.just(updatedEntity.getAmount());
                 });
