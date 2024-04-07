@@ -1,5 +1,5 @@
 # Usa una imagen base que contenga Java 17 y sea compatible con Spring Boot
-FROM openjdk
+FROM openjdk:latest
 
 # Establece el directorio de trabajo en /app
 WORKDIR /app
