@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "wallet")
 @Getter
 @Setter
 @AllArgsConstructor

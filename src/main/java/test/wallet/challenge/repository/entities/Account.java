@@ -10,7 +10,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "account")
+@Table(name = "account", schema = "wallet")
 @Getter
 @Setter
 @AllArgsConstructor
