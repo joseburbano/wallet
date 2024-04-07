@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import test.wallet.challenge.repository.entities.UserEntity;
+import test.wallet.challenge.repository.entities.User;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class AccountDTO {
 
     private Integer id;
     private Double amount;
-    private UserEntity user;
+    private User user;
     private Boolean active;
 
 }

@@ -9,7 +9,7 @@ import reactor.core.scheduler.Schedulers;
 import test.wallet.challenge.domain.gateways.AccountRepository;
 import test.wallet.challenge.domain.model.AccountDTO;
 import test.wallet.challenge.repository.SqlServerAccountRepository;
-import test.wallet.challenge.repository.entities.AccountEntity;
+import test.wallet.challenge.repository.entities.Account;
 import test.wallet.common.enums.ErrorCode;
 import test.wallet.common.exception.InfrastructureException;
 
@@ -35,7 +35,7 @@ public class AccountGatewayImpl implements AccountRepository {
                     new Object[]{RESOURCE_NAME}, Locale.getDefault()), ErrorCode.FOUND));
         }
 
-        return Mono.fromSupplier(() -> repository.save(modelMapper.map(accountDTO, AccountEntity.class)))
+        return Mono.fromSupplier(() -> repository.save(modelMapper.map(accountDTO, Account.class)))
                 .flatMap(savedEntity -> Mono.empty());
     }
 
@@ -49,7 +49,7 @@ public class AccountGatewayImpl implements AccountRepository {
                 .publishOn(Schedulers.boundedElastic())
                 .flatMap(accountEntity -> {
                     accountEntity.setAmount(amount);
-                    AccountEntity updatedEntity = repository.save(accountEntity);
+                    Account updatedEntity = repository.save(accountEntity);
                     return Mono.just(updatedEntity.getAmount());
                 });
     }

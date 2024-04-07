@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import test.wallet.challenge.repository.entities.UserEntity;
+import test.wallet.challenge.repository.entities.User;
 
 
-public interface SqlServerUserRepository extends JpaRepository<UserEntity, Integer>, JpaSpecificationExecutor<UserEntity> {
+public interface SqlServerUserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
 
-    @Query("SELECT u FROM UserEntity  u WHERE u.userId = :userId")
-    UserEntity findByUserId(@Param("userId") String userId);
+    @Query("SELECT u FROM User  u WHERE u.userId = :userId")
+    User findByUserId(@Param("userId") String userId);
 }

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountEntity extends BaseEntity {
+public class Account extends BaseEntity {
 
     @NotNull
     @DecimalMin(value = "0", message = "El valor debe ser positivo")
@@ -28,7 +28,7 @@ public class AccountEntity extends BaseEntity {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private User user;
 
     @NotNull
     private Boolean active;

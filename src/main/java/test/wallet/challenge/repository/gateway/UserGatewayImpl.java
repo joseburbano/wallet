@@ -12,7 +12,7 @@ import test.wallet.challenge.domain.gateways.UserRepository;
 import test.wallet.challenge.domain.model.AccountDTO;
 import test.wallet.challenge.domain.model.UserDTO;
 import test.wallet.challenge.repository.SqlServerUserRepository;
-import test.wallet.challenge.repository.entities.UserEntity;
+import test.wallet.challenge.repository.entities.User;
 import test.wallet.common.enums.ErrorCode;
 import test.wallet.common.exception.InfrastructureException;
 
@@ -48,7 +48,7 @@ public class UserGatewayImpl implements UserRepository {
                                         new Object[]{RESOURCE_NAME}, Locale.getDefault()),
                                 ErrorCode.FOUND));
                     } else {
-                        return Mono.just(userRepository.save(modelMapper.map(userDTO, UserEntity.class)))
+                        return Mono.just(userRepository.save(modelMapper.map(userDTO, User.class)))
                                 .flatMap(savedEntity ->
                                         accountRepository.save(AccountDTO.builder()
                                                         .user(savedEntity)
