@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import reactor.core.publisher.Mono;
 import test.wallet.challenge.domain.model.BalanceDTO;
 import test.wallet.challenge.domain.model.RechargeWalletDTO;
 import test.wallet.challenge.domain.model.UserDTO;
@@ -22,10 +23,10 @@ class ChallengeServiceImplTest {
     @DisplayName("Calculate Maximum")
     void testWallet() {
         UserDTO testCase3 = new UserDTO(null, "107528723", "José Manuel Burbano Prieto", "jmburbanopr@gmail.com", "3182010836", true);
-        UserDTO testBalanceCase3 = new UserDTO(null, "107528723", "José Manuel Burbano Prieto", "jmburbanopr@gmail.com", "3182010836", true);
+        Mono<UserDTO> testBalanceCase3 = Mono.just(testCase3);
 
         // Usar block() para esperar la emisión del Mono y obtener el valor resultante
-        UserDTO resultUserDTO = challengeServiceImpl.registerUser(testCase3).block();
+        Mono<UserDTO> resultUserDTO = challengeServiceImpl.registerUser(testCase3);
         assertEquals(testBalanceCase3, resultUserDTO);
 
         BalanceDTO testCase1 = new BalanceDTO("107528723", "José Manuel Burbano Prieto", "Su saldo", 0.0);

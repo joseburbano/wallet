@@ -38,6 +38,7 @@ class ChallengeControllerTest {
     private Mono<BalanceDTO> balanceDTO;
     private Mono<RechargeWalletDTO> rechargeWalletDTO;
     private Mono<UserDTO> userDTO;
+    private UserDTO userDTOTwo;
 
 
     @BeforeEach
@@ -47,7 +48,16 @@ class ChallengeControllerTest {
                 .phone("3182010836")
                 .fullName("José Manuel Burbano Prieto")
                 .userId("107528723")
+                .active(true)
                 .build());
+
+        userDTOTwo = UserDTO.builder()
+                .email("jmburbanopr@gmail.com")
+                .phone("3182010836")
+                .fullName("José Manuel Burbano Prieto")
+                .userId("107528723")
+                .active(true)
+                .build();
 
         rechargeWalletDTO = Mono.just(RechargeWalletDTO.builder()
                 .phone("3182010836")
@@ -78,7 +88,7 @@ class ChallengeControllerTest {
 
         mockMvc.perform(post("/v1/challenge/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(userDTO)))
+                        .content(asJsonString(userDTOTwo)))
                 .andExpect(status().isOk());
     }
 
