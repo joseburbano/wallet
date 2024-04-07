@@ -40,10 +40,7 @@ public class AccountGatewayImpl implements AccountRepository {
     @Override
     public Mono<Double> updateAmount(Double amount, Integer userId) {
         return Mono.justOrEmpty(repository.findByUserId(userId))
-                .switchIfEmpty(Mono.error(new InfrastructureException(
-                        messageSource.getMessage("common.resource.not.found",
-                                new Object[]{RESOURCE_NAME}, Locale.getDefault()),
-                        ErrorCode.NOT_FOUND)))
+                .switchIfEmpty(Mono.error(new InfrastructureException(ErrorCode.NOT_FOUND.getMessage(), ErrorCode.NOT_FOUND)))
                 .publishOn(Schedulers.boundedElastic())
                 .flatMap(accountEntity -> {
                     accountEntity.setAmount(amount);

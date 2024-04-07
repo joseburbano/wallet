@@ -6,6 +6,15 @@ meta {
 
 post {
   url: http://localhost:8070/v1/challenge/register
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "userId": "1075298243",
+    "fullName": "Jose ALberto",
+    "email": "joseAlber@gmail.com",
+    "phone": "3180234923"
+  }
 }
