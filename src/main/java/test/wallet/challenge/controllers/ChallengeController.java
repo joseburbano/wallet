@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import test.wallet.challenge.domain.model.BalanceDTO;
 import test.wallet.challenge.domain.model.RechargeWalletDTO;
 import test.wallet.challenge.domain.model.UserDTO;
 import test.wallet.challenge.domain.services.ChallengeService;
