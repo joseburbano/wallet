@@ -18,8 +18,8 @@ import javax.validation.constraints.NotNull;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_sequence")
-    @SequenceGenerator(name = "account_sequence", sequenceName = "account_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_account")
+    @SequenceGenerator(name = "sequence_account", sequenceName = "sequence_account", allocationSize = 1)
     private Integer id;
 
     @NotNull
