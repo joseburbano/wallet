@@ -35,6 +35,7 @@ public class UserGatewayImpl implements UserRepository {
 
     @Override
     public Mono<UserDTO> save(UserDTO userDTO) {
+        log.info("save {} ", userDTO);
         return Mono.defer(() -> {
             User existingUser = userRepository.findByUserId(userDTO.getUserId());
             if (existingUser != null) {
@@ -63,6 +64,7 @@ public class UserGatewayImpl implements UserRepository {
 
     @Override
     public Mono<UserDTO> findByUserId(String userId) {
+        log.info("findByUserId {} ", userId);
         return Mono.justOrEmpty(userRepository.findByUserId(userId))
                 .switchIfEmpty(Mono.error(new InfrastructureException(ErrorCode.NOT_FOUND.getMessage(), ErrorCode.NOT_FOUND)))
                 .map(entity -> modelMapper.map(entity, UserDTO.class));
