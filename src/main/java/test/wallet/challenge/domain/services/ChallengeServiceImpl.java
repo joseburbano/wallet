@@ -26,7 +26,6 @@ public class ChallengeServiceImpl implements ChallengeService {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
     private static final String RESOURCE_NAME = "ChallengeService";
-    @NonNull
     private final MessageSource messageSource;
 
     @Override

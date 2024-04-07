@@ -27,8 +27,6 @@ public class AccountGatewayImpl implements AccountRepository {
 
     private final ModelMapper modelMapper;
 
-    private static final String RESOURCE_NAME = "AccountGateway";
-
     @Override
     public Mono<Void> save(AccountDTO accountDTO) {
         log.info("save {} ", accountDTO);
