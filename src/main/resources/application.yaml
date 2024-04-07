@@ -6,7 +6,7 @@ spring:
   application:
     name: wallet
 
-  # Configuración de la base de datos
+  # Configuraciï¿½n de la base de datos
   datasource:
     url: jdbc:sqlserver://test.cdiaysuewfbl.us-east-2.rds.amazonaws.com:1433;databaseName=wallet;currentSchema=wallet;encrypt=false;trustServerCertificate=true
     username: admin
