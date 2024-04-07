@@ -29,7 +29,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     @Override
     public Mono<BalanceDTO> balanceWallet(String userId, String phone) {
-        log.info("balanceWallet {} ", userId + " " + phone);
+        log.info("BalanceWallet from challengeServiceImpl {} {}", userId, phone);
         return findByUserId(userId, phone)
                 .flatMap(userDTO -> accountRepository.findByUserId(userDTO.getId())
                         .map(accountDTO -> BalanceDTO.builder()
@@ -43,13 +43,13 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     @Override
     public Mono<UserDTO> registerUser(UserDTO userDTO) {
-        log.info("registerUser {} ", userDTO);
+        log.info("RegisterUser from challengeServiceImpl {} ", userDTO);
         return userRepository.save(userDTO);
     }
 
     @Override
     public Mono<BalanceDTO> rechargeWallet(RechargeWalletDTO rechargeWalletDTO) {
-        log.info("rechargeWallet {} ", rechargeWalletDTO);
+        log.info("RechargeWallet from challengeServiceImpl {} ", rechargeWalletDTO);
         return findByUserId(rechargeWalletDTO.getUserId(), rechargeWalletDTO.getPhone())
                 .flatMap(userDTO ->
                         accountRepository.updateAmount(rechargeWalletDTO.getAmount(), userDTO.getId())
@@ -65,7 +65,7 @@ public class ChallengeServiceImpl implements ChallengeService {
     }
 
     private Mono<UserDTO> findByUserId(String userId, String phone) {
-        log.info("findByUserId {} ", userId + " " + phone);
+        log.info("FindByUserId from challengeServiceImpl {} ", userId + " " + phone);
         return userRepository.findByUserId(userId)
                 .flatMap(userDTO -> {
                     if (!Objects.equals(userDTO.getPhone(), phone)) {

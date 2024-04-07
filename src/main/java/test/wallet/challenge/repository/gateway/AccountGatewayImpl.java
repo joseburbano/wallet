@@ -25,14 +25,14 @@ public class AccountGatewayImpl implements AccountRepository {
 
     @Override
     public Mono<Void> save(AccountDTO accountDTO) {
-        log.info("save {} ", accountDTO);
+        log.info("Save from accountGatewayImpl {} ", accountDTO);
         return Mono.fromSupplier(() -> repository.save(modelMapper.map(accountDTO, Account.class)))
                 .flatMap(savedEntity -> Mono.empty());
     }
 
     @Override
     public Mono<Double> updateAmount(Double amount, Integer userId) {
-        log.info("updateAmount {} {}", amount, userId);
+        log.info("UpdateAmount from accountGatewayImpl {} {}", amount, userId);
         return Mono.justOrEmpty(repository.findByUserId(userId))
                 .switchIfEmpty(Mono.error(new InfrastructureException(ErrorCode.NOT_FOUND.getMessage(), ErrorCode.NOT_FOUND)))
                 .publishOn(Schedulers.boundedElastic())
@@ -45,7 +45,7 @@ public class AccountGatewayImpl implements AccountRepository {
 
     @Override
     public Mono<AccountDTO> findByUserId(Integer userId) {
-        log.info("findByUserId {} ", userId);
+        log.info("FindByUserId from accountGatewayImpl {} ", userId);
         return Mono.justOrEmpty(repository.findByUserId(userId))
                 .switchIfEmpty(Mono.error(new InfrastructureException(ErrorCode.NOT_FOUND.getMessage(), ErrorCode.NOT_FOUND)))
                 .map(entity -> modelMapper.map(entity, AccountDTO.class));
