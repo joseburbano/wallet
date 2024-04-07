@@ -2,6 +2,8 @@ package test.wallet.challenge.repository.gateway;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -20,6 +22,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class AccountGatewayImpl implements AccountRepository {
 
+    private static final Logger log = LoggerFactory.getLogger(AccountGatewayImpl.class);
     private final SqlServerAccountRepository repository;
 
     private final ModelMapper modelMapper;
@@ -56,6 +59,8 @@ public class AccountGatewayImpl implements AccountRepository {
 
     @Override
     public Mono<AccountDTO> findByUserId(String userId) {
+        log.info("manuel mire");
+        log.info(userId);
         return Mono.justOrEmpty(repository.findByUserId(userId))
                 .switchIfEmpty(Mono.error(new InfrastructureException(messageSource.getMessage("comun.recurso.no.encontrado",
                         new Object[]{RESOURCE_NAME}, Locale.getDefault()), ErrorCode.NOT_FOUND)))

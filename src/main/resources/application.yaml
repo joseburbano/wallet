@@ -8,7 +8,7 @@ spring:
 
   # Configuración de la base de datos
   datasource:
-    url: jdbc:sqlserver://test.cdiaysuewfbl.us-east-2.rds.amazonaws.com:1433;databaseName=wallet;encrypt=false;trustServerCertificate=true;currentSchema=wallet
+    url: jdbc:sqlserver://test.cdiaysuewfbl.us-east-2.rds.amazonaws.com:1433;databaseName=wallet;currentSchema=wallet;encrypt=false;trustServerCertificate=true
     username: admin
     password: 19950323.*Test
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
