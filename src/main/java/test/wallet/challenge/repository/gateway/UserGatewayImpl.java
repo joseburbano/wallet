@@ -58,7 +58,7 @@ public class UserGatewayImpl implements UserRepository {
     @Override
     public Mono<UserDTO> findByUserId(String userId) {
         return Mono.justOrEmpty(userRepository.findByUserId(userId))
-                .switchIfEmpty(Mono.error(new InfrastructureException(messageSource.getMessage("comun.recurso.no.encontrado",
+                .switchIfEmpty(Mono.error(new InfrastructureException(messageSource.getMessage("common.resource.not.found",
                         new Object[]{RESOURCE_NAME}, Locale.getDefault()), ErrorCode.NOT_FOUND)))
                 .map(entity -> modelMapper.map(entity, UserDTO.class));
     }
