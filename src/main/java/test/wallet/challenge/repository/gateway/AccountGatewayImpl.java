@@ -33,11 +33,6 @@ public class AccountGatewayImpl implements AccountRepository {
 
     @Override
     public Mono<Void> save(AccountDTO accountDTO) {
-        if (!Objects.isNull(accountDTO.getId())) {
-            return Mono.error(new InfrastructureException(messageSource.getMessage("comun.recurso.existe",
-                    new Object[]{RESOURCE_NAME}, Locale.getDefault()), ErrorCode.FOUND));
-        }
-
         return Mono.fromSupplier(() -> repository.save(modelMapper.map(accountDTO, Account.class)))
                 .flatMap(savedEntity -> Mono.empty());
     }
