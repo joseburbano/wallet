@@ -21,8 +21,8 @@ class ChallengeServiceImplTest {
     @Test
     @DisplayName("Calculate Maximum")
     void testWallet() {
-        UserDTO testCase3 = new UserDTO(null, "107528723", "José Manuel Burbano Prieto", "jmburbanopr@gmail.com", "3182010836");
-        UserDTO testBalanceCase3 = new UserDTO(null, "107528723", "José Manuel Burbano Prieto", "jmburbanopr@gmail.com", "3182010836");
+        UserDTO testCase3 = new UserDTO(null, "107528723", "José Manuel Burbano Prieto", "jmburbanopr@gmail.com", "3182010836", true);
+        UserDTO testBalanceCase3 = new UserDTO(null, "107528723", "José Manuel Burbano Prieto", "jmburbanopr@gmail.com", "3182010836", true);
 
         // Usar block() para esperar la emisión del Mono y obtener el valor resultante
         UserDTO resultUserDTO = challengeServiceImpl.registerUser(testCase3).block();

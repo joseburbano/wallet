@@ -27,4 +27,6 @@ public class UserDTO {
     @NotNull(message = "{common.field.required}")
     private String phone;
 
+    private Boolean active = true;
+
 }
