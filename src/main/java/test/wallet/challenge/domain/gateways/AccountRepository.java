@@ -7,7 +7,7 @@ public interface AccountRepository {
 
     Mono<Void> save(AccountDTO accountDTO);
 
-    Mono<Double> updateAmount(Double amount, String userId);
+    Mono<Double> updateAmount(Double amount, Integer userId);
 
-    Mono<AccountDTO> findByUserId(String userId);
+    Mono<AccountDTO> findByUserId(Integer userId);
 }

@@ -2,10 +2,13 @@ package test.wallet.challenge.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import test.wallet.challenge.domain.model.BalanceDTO;
 import test.wallet.challenge.domain.model.RechargeWalletDTO;
 import test.wallet.challenge.domain.model.UserDTO;
 import test.wallet.challenge.domain.services.ChallengeService;
@@ -17,6 +20,7 @@ import test.wallet.common.dto.ResponseDTO;
 @RequestMapping(value = "/v1/challenge")
 @AllArgsConstructor
 public class ChallengeController extends AbstractRestController {
+    private static final Logger log = LoggerFactory.getLogger(ChallengeController.class);
     private final ChallengeService challengeService;
 
     @GetMapping(value = "/ping")
@@ -27,7 +31,7 @@ public class ChallengeController extends AbstractRestController {
     @GetMapping(value = "/wallet/balance", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ResponseDTO> balanceWallet(@RequestParam("userId") String userId,
                                                      @RequestParam("phone") String phone) {
-        ResponseDTO responseDTO = buildSuccessResponseDTO(challengeService.balanceWallet(userId, phone));
+        ResponseDTO responseDTO = buildSuccessResponseDTO(challengeService.balanceWallet(userId, phone).block());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 

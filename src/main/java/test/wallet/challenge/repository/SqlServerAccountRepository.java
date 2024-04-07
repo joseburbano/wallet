@@ -9,6 +9,6 @@ import test.wallet.challenge.repository.entities.Account;
 
 public interface SqlServerAccountRepository extends JpaRepository<Account, Integer>, JpaSpecificationExecutor<Account> {
 
-    @Query("SELECT a FROM Account a WHERE a.user = :userId")
-    Account findByUserId(@Param("userId") String userId);
+    @Query("SELECT a FROM Account a WHERE a.user.id = :userId")
+    Account findByUserId(@Param("userId") Integer userId);
 }

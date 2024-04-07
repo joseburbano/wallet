@@ -43,7 +43,7 @@ public class AccountGatewayImpl implements AccountRepository {
     }
 
     @Override
-    public Mono<Double> updateAmount(Double amount, String userId) {
+    public Mono<Double> updateAmount(Double amount, Integer userId) {
         return Mono.justOrEmpty(repository.findByUserId(userId))
                 .switchIfEmpty(Mono.error(new InfrastructureException(
                         messageSource.getMessage("common.resource.not.found",
@@ -58,10 +58,9 @@ public class AccountGatewayImpl implements AccountRepository {
     }
 
     @Override
-    public Mono<AccountDTO> findByUserId(String userId) {
+    public Mono<AccountDTO> findByUserId(Integer userId) {
         return Mono.justOrEmpty(repository.findByUserId(userId))
-                .switchIfEmpty(Mono.error(new InfrastructureException(messageSource.getMessage("common.resource.not.found",
-                        new Object[]{RESOURCE_NAME}, Locale.getDefault()), ErrorCode.NOT_FOUND)))
-                .map(accountEntity -> modelMapper.map(accountEntity, AccountDTO.class));
+                .switchIfEmpty(Mono.error(new InfrastructureException(ErrorCode.NOT_FOUND.getMessage(), ErrorCode.NOT_FOUND)))
+                .map(entity -> modelMapper.map(entity, AccountDTO.class));
     }
 }
