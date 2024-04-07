@@ -6,5 +6,5 @@ public interface UserRepository {
 
     Mono<UserDTO> save(UserDTO userDTO);
 
-    Mono<UserDTO> findByUserId(String id);
+    Mono<UserDTO> findByUserId(String userId);
 }

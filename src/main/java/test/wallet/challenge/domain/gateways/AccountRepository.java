@@ -9,5 +9,5 @@ public interface AccountRepository {
 
     Mono<Double> updateAmount(Double amount, String userId);
 
-    Mono<AccountDTO> findByUserId(String id);
+    Mono<AccountDTO> findByUserId(String userId);
 }

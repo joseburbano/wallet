@@ -1,7 +1,6 @@
 package test.wallet.challenge.repository.gateway;
 
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Repository;
