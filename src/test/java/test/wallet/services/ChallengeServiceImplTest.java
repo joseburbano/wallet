@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class ChallengeServiceImplTest {
-/*
+
     @InjectMocks
     private ChallengeServiceImpl challengeServiceImpl;
 
@@ -36,5 +36,5 @@ class ChallengeServiceImplTest {
         BalanceDTO testCaseBalance2 = new BalanceDTO("107528723", "José Manuel Burbano Prieto", "Su saldo", 5000.00);
         BalanceDTO resultBalanceDTO2 = challengeServiceImpl.rechargeWallet(testCase2).block();
         assertEquals(testCaseBalance2, resultBalanceDTO2);
-    }*/
+    }
 }

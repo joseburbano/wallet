@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 class ChallengeControllerTest {
-    /*
+
     @Mock
     private ChallengeService challengeService;
     @InjectMocks
@@ -114,6 +114,4 @@ class ChallengeControllerTest {
             throw new RuntimeException(ex);
         }
     }
-*/
-
 }
