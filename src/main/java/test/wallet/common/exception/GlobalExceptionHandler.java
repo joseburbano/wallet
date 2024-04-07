@@ -15,7 +15,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InfrastructureException.class)
     public ResponseEntity<ErrorResponse> handleInfrastructureException(InfrastructureException ex) {
         ErrorResponse errorResponse = new ErrorResponse(false, new ErrorData(ex.getMessage()), ex.getErrorMessage(), ex.getErrorCode().getCode());
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        HttpStatus httpStatus = HttpStatus.valueOf(ex.getErrorCode().getCode());
+        return new ResponseEntity<>(errorResponse, httpStatus);
     }
 
     // Otros manejadores de excepciones si es necesario
