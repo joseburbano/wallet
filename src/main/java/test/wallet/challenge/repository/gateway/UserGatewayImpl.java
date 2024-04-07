@@ -2,6 +2,8 @@ package test.wallet.challenge.repository.gateway;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -21,6 +23,7 @@ import java.util.Locale;
 @AllArgsConstructor
 public class UserGatewayImpl implements UserRepository {
 
+    private static final Logger log = LoggerFactory.getLogger(UserGatewayImpl.class);
     private final ModelMapper modelMapper;
 
     private final MessageSource messageSource;
@@ -57,6 +60,7 @@ public class UserGatewayImpl implements UserRepository {
 
     @Override
     public Mono<UserDTO> findByUserId(String userId) {
+        log.info("manuel aca es");
         return Mono.justOrEmpty(userRepository.findByUserId(userId))
                 .switchIfEmpty(Mono.error(new InfrastructureException(messageSource.getMessage("common.resource.not.found",
                         new Object[]{RESOURCE_NAME}, Locale.getDefault()), ErrorCode.NOT_FOUND)))

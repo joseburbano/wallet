@@ -33,7 +33,7 @@ public class ChallengeServiceImpl implements ChallengeService {
     public Mono<BalanceDTO> balanceWallet(String userId, String phone) {
         log.info("balanceWallet {} ", userId + " " + phone);
         return findByUserId(userId, phone)
-                .flatMap(userDTO -> accountRepository.findByUserId(userId)
+                .flatMap(userDTO -> accountRepository.findByUserId(userDTO.getUserId())
                         .map(accountDTO -> BalanceDTO.builder()
                                 .fullName(userDTO.getFullName())
                                 .userId(userDTO.getUserId())

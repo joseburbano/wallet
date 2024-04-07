@@ -22,3 +22,8 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: 'false'
+
+  messages:
+    basename: messages
+    encoding: UTF-8
+    fallback-to-system-locale: true

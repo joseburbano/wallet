@@ -59,12 +59,9 @@ public class AccountGatewayImpl implements AccountRepository {
 
     @Override
     public Mono<AccountDTO> findByUserId(String userId) {
-        log.info("manuel mire");
-        log.info(userId);
         return Mono.justOrEmpty(repository.findByUserId(userId))
                 .switchIfEmpty(Mono.error(new InfrastructureException(messageSource.getMessage("common.resource.not.found",
                         new Object[]{RESOURCE_NAME}, Locale.getDefault()), ErrorCode.NOT_FOUND)))
                 .map(accountEntity -> modelMapper.map(accountEntity, AccountDTO.class));
     }
-
 }
