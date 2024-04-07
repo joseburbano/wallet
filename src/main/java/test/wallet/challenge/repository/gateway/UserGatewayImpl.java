@@ -22,19 +22,14 @@ import java.util.Locale;
 @AllArgsConstructor
 public class UserGatewayImpl implements UserRepository {
 
-    @NonNull
     private final ModelMapper modelMapper;
 
-    @NonNull
     private final MessageSource messageSource;
 
-    @NonNull
     private static final String RESOURCE_NAME = "UserGateway";
 
-    @NonNull
     private final SqlServerUserRepository userRepository;
 
-    @NonNull
     private final AccountRepository accountRepository;
 
     @Override
