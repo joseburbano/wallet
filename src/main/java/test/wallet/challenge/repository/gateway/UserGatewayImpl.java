@@ -36,27 +36,31 @@ public class UserGatewayImpl implements UserRepository {
 
     @Override
     public Mono<UserDTO> save(UserDTO userDTO) {
-        return Mono.just(userRepository.findByUserId(userDTO.getUserId()))
-                .publishOn(Schedulers.boundedElastic())
-                .flatMap(entity -> {
-                    if (entity != null) {
-                        return Mono.error(new InfrastructureException(
-                                messageSource.getMessage("comun.recurso.existe",
-                                        new Object[]{RESOURCE_NAME}, Locale.getDefault()),
-                                ErrorCode.FOUND));
-                    } else {
-                        return Mono.just(userRepository.save(modelMapper.map(userDTO, User.class)))
-                                .flatMap(savedEntity ->
-                                        accountRepository.save(AccountDTO.builder()
-                                                        .user(savedEntity)
-                                                        .active(true)
-                                                        .amount(0.0)
-                                                        .build())
-                                                .thenReturn(modelMapper.map(savedEntity, UserDTO.class))
-                                );
-                    }
-                });
+        return Mono.defer(() -> {
+            User existingUser = userRepository.findByUserId(userDTO.getUserId());
+            if (existingUser != null) {
+                return Mono.error(new InfrastructureException(
+                        messageSource.getMessage("comun.recurso.existe",
+                                new Object[]{RESOURCE_NAME}, Locale.getDefault()),
+                        ErrorCode.FOUND));
+            } else {
+                return Mono.just(userDTO)
+                        .map(dto -> modelMapper.map(dto, User.class))
+                        .flatMap(savedEntity ->
+                                Mono.just(savedEntity)
+                                        .flatMap(user ->
+                                                accountRepository.save(AccountDTO.builder()
+                                                                .user(user)
+                                                                .active(true)
+                                                                .amount(0.0)
+                                                                .build())
+                                                        .thenReturn(modelMapper.map(user, UserDTO.class))
+                                        )
+                        );
+            }
+        });
     }
+
 
     @Override
     public Mono<UserDTO> findByUserId(String userId) {
