@@ -35,17 +35,14 @@ public class UserGatewayImpl implements UserRepository {
                 return Mono.error(new InfrastructureException(ErrorCode.FOUND.getMessage(), ErrorCode.FOUND));
             } else {
                 return Mono.just(userDTO)
-                        .map(dto -> modelMapper.map(dto, User.class))
+                        .map(dto -> userRepository.save(modelMapper.map(dto, User.class)))
                         .flatMap(savedEntity ->
-                                Mono.just(savedEntity)
-                                        .flatMap(user ->
-                                                accountRepository.save(AccountDTO.builder()
-                                                                .user(user)
-                                                                .active(true)
-                                                                .amount(0.0)
-                                                                .build())
-                                                        .thenReturn(modelMapper.map(user, UserDTO.class))
-                                        )
+                                accountRepository.save(AccountDTO.builder()
+                                                .user(savedEntity)
+                                                .active(true)
+                                                .amount(0.0)
+                                                .build())
+                                        .thenReturn(modelMapper.map(savedEntity, UserDTO.class))
                         );
             }
         });
