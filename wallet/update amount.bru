@@ -1,0 +1,19 @@
+meta {
+  name: update amount
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8070/v1/challenge/wallet/recharge
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "userId": "1075287280",
+    "amount": "5000.00",
+    "phone": "3182010835"
+  }
+}

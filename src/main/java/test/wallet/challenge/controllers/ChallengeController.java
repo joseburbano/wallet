@@ -42,7 +42,7 @@ public class ChallengeController extends AbstractRestController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/wallet/recharge", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_XML_VALUE},
+    @PutMapping(value = "/wallet/recharge", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_XML_VALUE})
     public ResponseEntity<ResponseDTO> rechargeWallet(@Valid @RequestBody RechargeWalletDTO rechargeWalletDTO) {
 
