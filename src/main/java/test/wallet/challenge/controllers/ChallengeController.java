@@ -26,7 +26,7 @@ public class ChallengeController extends AbstractRestController {
 
     @GetMapping(value = "/wallet/balance", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ResponseDTO> balanceWallet(@RequestParam("userId") String userId,
-                                                         @RequestParam("phone") String phone) {
+                                                     @RequestParam("phone") String phone) {
         ResponseDTO responseDTO = buildSuccessResponseDTO(challengeService.balanceWallet(userId, phone));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
