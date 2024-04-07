@@ -1,14 +1,15 @@
-# Usar una imagen base que contenga Java y sea compatible con Spring Boot
-FROM adoptopenjdk/openjdk17:alpine-jre
+# Usa una imagen base que contenga Java 17 y sea compatible con Spring Boot
+FROM openjdk
 
-# Establecer el directorio de trabajo en /app
+# Establece el directorio de trabajo en /app
 WORKDIR /app
 
-# Copiar el archivo JAR generado por Maven a la imagen Docker
-COPY target/wallet-2.0.1-rc-1.jar app.jar
+# Copia el archivo JAR construido desde el directorio target de tu proyecto a la imagen
+COPY target/*.jar app.jar
 
-# Exponer el puerto en el que la aplicación se ejecuta dentro del contenedor
+# Expone el puerto en el que se ejecuta tu aplicación Spring Boot
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación cuando se inicie el contenedor
+# Define el comando para ejecutar tu aplicación Spring Boot cuando se inicie el contenedor
 CMD ["java", "-jar", "app.jar"]
+
