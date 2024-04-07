@@ -39,7 +39,7 @@ public class ChallengeController extends AbstractRestController {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_XML_VALUE})
     public ResponseEntity<ResponseDTO> registerUser(@Valid @RequestBody UserDTO registerUserDTO) {
 
-        ResponseDTO responseDTO = buildSuccessResponseDTO(challengeService.registerUser(registerUserDTO));
+        ResponseDTO responseDTO = buildSuccessResponseDTO(challengeService.registerUser(registerUserDTO).block());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
@@ -47,7 +47,7 @@ public class ChallengeController extends AbstractRestController {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_XML_VALUE})
     public ResponseEntity<ResponseDTO> rechargeWallet(@Valid @RequestBody RechargeWalletDTO rechargeWalletDTO) {
 
-        ResponseDTO responseDTO = buildSuccessResponseDTO(challengeService.rechargeWallet(rechargeWalletDTO));
+        ResponseDTO responseDTO = buildSuccessResponseDTO(challengeService.rechargeWallet(rechargeWalletDTO).block());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
