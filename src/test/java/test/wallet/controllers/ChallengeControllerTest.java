@@ -35,7 +35,7 @@ class ChallengeControllerTest {
     private ChallengeController challengeController;
     private MockMvc mockMvc;
     private Mono<BalanceDTO> balanceDTO;
-    private Mono<RechargeWalletDTO> rechargeWalletDTO;
+    private RechargeWalletDTO rechargeWalletDTO;
     private Mono<UserDTO> userDTO;
     private UserDTO userDTOTwo;
 
@@ -58,11 +58,11 @@ class ChallengeControllerTest {
                 .active(true)
                 .build();
 
-        rechargeWalletDTO = Mono.just(RechargeWalletDTO.builder()
+        rechargeWalletDTO = RechargeWalletDTO.builder()
                 .phone("3182010836")
                 .userId("107528723")
                 .amount(5000.00)
-                .build());
+                .build();
 
         balanceDTO = Mono.just(BalanceDTO.builder()
                 .userId("107528723")
