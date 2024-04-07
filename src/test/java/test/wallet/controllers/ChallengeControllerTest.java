@@ -23,8 +23,7 @@ import test.wallet.challenge.domain.services.ChallengeService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
@@ -93,11 +92,11 @@ class ChallengeControllerTest {
     }
 
     @Test
-    @DisplayName("Register User Post")
-    void testCalculateMaximumPost() throws Exception {
+    @DisplayName("Recharge Wallet Put")
+    void testRechargeWalletPut() throws Exception {
         when(challengeService.rechargeWallet(any())).thenReturn(balanceDTO);
 
-        mockMvc.perform(post("/v1/challenge/wallet/recharge")
+        mockMvc.perform(put("/v1/challenge/wallet/recharge")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(rechargeWalletDTO)))
                 .andExpect(status().isOk());
@@ -105,7 +104,7 @@ class ChallengeControllerTest {
 
     @Test
     @DisplayName("Balance Wallet Get")
-    void testCalculateMaximumGet() throws Exception {
+    void testBalanceWalletGet() throws Exception {
         when(challengeService.balanceWallet("107528723", "3182010836")).thenReturn(balanceDTO);
 
         mockMvc.perform(get("/v1/challenge/wallet/balance")
